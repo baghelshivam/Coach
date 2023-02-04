@@ -1,0 +1,58 @@
+<div class="container">
+    <h1>
+        {{name}}
+    </h1>
+    <input max="7" min="1" name="numSeats" [(ngModel)]="numSeats" type="number">
+    <button class="btn" (click)="onClick()">Book</button>
+
+    <ng-container *ngFor="let seat of bookedSeat">
+        {{seat}}
+    </ng-container>
+</div>
+
+<div [ngStyle]="{'border-radius':'60px'}" class="container">
+    <div class="row">
+        <ng-container *ngFor="let seat of rowSeats">
+            <div class="column">
+                <div>
+                    R{{seat.rowNo}}
+                </div>
+                <div>
+                    <ng-container *ngFor="let x of rowMap">
+
+                        <ng-container *ngIf="seat.rowNo != 12">
+                            <ng-container *ngIf="x <= (7-seat.Seat)">
+                                <!-- filled seats -->
+                                <div class="filled">
+                                    {{((seat.rowNo-1)*7)+x}}
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="x > (7-seat.Seat)">
+                                <!-- empty seats -->
+                                <div class="empty">
+                                    {{((seat.rowNo-1)*7)+x}}
+                                </div>
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-container *ngIf="seat.rowNo == 12 ">
+                            <ng-container *ngIf="x <= (3-seat.Seat) && x<=3">
+                                <!-- filled seats -->
+                                <div class="filled">
+                                    {{((seat.rowNo-1)*7)+x}}
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="x > (3-seat.Seat) && x<=3">
+                                <!-- empty seats -->
+                                <div class="empty">
+                                    {{((seat.rowNo-1)*7)+x}}
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+</div>

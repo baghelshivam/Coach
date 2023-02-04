@@ -1,0 +1,27 @@
+h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    height: inherit;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+}
+
+.empty {
+    color: green;
+    padding: 0px 3px 0px 3px;
+}
+
+.filled {
+    color: red;
+    padding: 0px 3px 0px 3px;
+}
