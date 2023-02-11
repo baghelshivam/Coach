@@ -1,3 +1,25 @@
+// Assumptions:
+
+// We are assuming that the coach starts filling from top to bottom in a given row and left to right order in rows.
+// We define the near seats as. If for a given user there are some seats in row 3 and row 5  ( gap of 1 row ) which is near compared to seats in row 4 and row 7 ( gap of 2 rows ).
+// We assume that all seats in one row are at the same distance respectively to a seat in another row irrespective of its column. e.g. a seat in row 4 is at the same distance for all seats in row 7.
+// If the user inputs more seats than available seats, seats will not get booked so users will not get in trouble.
+
+// Database Structure:
+// We are mapping the number of empty seats left to the array of rows.
+// e.g. all rows with 3 seats left will be together in a sorted array where the first index of the array is the row with the minimum index.
+// emptySeats[3].row is all rows with 3 seats left.
+// We are also mapping row indexes with seats left. e.g. for a given row, we know how many seats are left open.
+// rowSeats[8].Seat shows how many seats are left for row 9 (index 8). 
+// for saving data in a database like MySQL below is the database structure. Assuming we have different users and it will generate a user id according to that.
+// one user can have multiple seats but one seat can have only one user assigned to it (one-to-many relationship).
+// We have one table named User and another table named Coach.
+// The user table has 2 columns User_Id and User_name.
+// User_Id is the primary key for the User table 
+// The coach table has 2 columns Seat_No(Seat_Id) from 1 to 80 and User_Id assigned to it.
+// Seat_No is the primary key for the Coach table and User_Id is the foreign key.
+
+
 import { Component } from '@angular/core';
 import { Seats, Row } from 'src/app/Seats';
 
