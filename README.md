@@ -1,27 +1,15 @@
 # Coach
+This project is deployed at [Coach_link](https://creative-kheer-d72e07.netlify.app/).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
+## Submission Sheet 
+The assumptions and details about database are listed at [Report and Assumptions](https://docs.google.com/document/d/1lA_yybudL0RFEamjMgNhs8d9MI82UZbQB5xYK6BiLMA/edit?usp=sharing).
 
-## Development server
+## Assumptions
+We are assuming that the coach starts filling from top to bottom in a given row and left to right order in rows.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+We define near seats as if for a given user there are some seats in row 3 and row 5  ( gap of 1 row ) which is near compared to seats in row 4 and row 7 ( gap of 2 rows ).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+We assume that all seats in one row are at the same distance respectively to a seat in another row irrespective of its column. e.g. a seat in row 4 is at the same distance to all seats in row 7.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+If the user inputs more seats than available seats, seats will not get booked so users will not get in trouble.
