@@ -1,58 +1,83 @@
 <div class="container">
-    <h1>
-        {{name}}
-    </h1>
-    <input max="7" min="1" name="numSeats" [(ngModel)]="numSeats" type="number">
-    <button class="btn" (click)="onClick()">Book</button>
-
-    <ng-container *ngFor="let seat of bookedSeat">
-        {{seat}}
+  <h1>
+    {{ name }}
+  </h1>
+  <form ng>
+    <input
+      max="7"
+      min="1"
+      name="numSeats"
+      [(ngModel)]="numSeats"
+      type="number"
+    />
+    <button class="btn" (click)="seatBookingSubmit()">Book</button>
+  </form>
+  <div>
+    <p [ngStyle]="{ color: 'red' }" *ngIf="numSeats > 7">
+      Max 7 seats at a time.
+    </p>
+    <p [ngStyle]="{ color: 'red' }" *ngIf="numSeats < 0">
+      Can not enter seats less than 1.
+    </p>
+    <ng-container *ngIf="previousReamainingSeats < numSeats">
+      <p [ngStyle]="{ color: 'red' }" *ngIf="remainingSeats > 0">
+        Only {{ remainingSeats }} seats left.
+      </p>
+      <p [ngStyle]="{ color: 'red' }" *ngIf="remainingSeats == 0">
+        No seats left
+      </p>
     </ng-container>
+    <ng-container
+      *ngIf="
+        numSeats < 8 && numSeats > 0 && numSeats <= previousReamainingSeats
+      "
+    >
+      <ng-container *ngFor="let seat of bookedSeat">
+        {{ seat }}
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
 
-<div [ngStyle]="{'border-radius':'60px'}" class="container">
-    <div class="row">
-        <ng-container *ngFor="let seat of rowSeats">
-            <div class="column">
-                <div>
-                    R{{seat.rowNo}}
+<div [ngStyle]="{ 'border-radius': '60px' }" class="container">
+  <div class="row">
+    <ng-container *ngFor="let seat of rowSeats">
+      <div class="column">
+        <div>R{{ seat.rowNo }}</div>
+        <div>
+          <ng-container *ngFor="let x of rowMap">
+            <ng-container *ngIf="seat.rowNo != 12">
+              <ng-container *ngIf="x <= 7 - seat.Seat">
+                <!-- filled seats -->
+                <div class="filled">
+                  {{ (seat.rowNo - 1) * 7 + x }}
                 </div>
-                <div>
-                    <ng-container *ngFor="let x of rowMap">
-
-                        <ng-container *ngIf="seat.rowNo != 12">
-                            <ng-container *ngIf="x <= (7-seat.Seat)">
-                                <!-- filled seats -->
-                                <div class="filled">
-                                    {{((seat.rowNo-1)*7)+x}}
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="x > (7-seat.Seat)">
-                                <!-- empty seats -->
-                                <div class="empty">
-                                    {{((seat.rowNo-1)*7)+x}}
-                                </div>
-                            </ng-container>
-                        </ng-container>
-
-                        <ng-container *ngIf="seat.rowNo == 12 ">
-                            <ng-container *ngIf="x <= (3-seat.Seat) && x<=3">
-                                <!-- filled seats -->
-                                <div class="filled">
-                                    {{((seat.rowNo-1)*7)+x}}
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="x > (3-seat.Seat) && x<=3">
-                                <!-- empty seats -->
-                                <div class="empty">
-                                    {{((seat.rowNo-1)*7)+x}}
-                                </div>
-                            </ng-container>
-                        </ng-container>
-                    </ng-container>
+              </ng-container>
+              <ng-container *ngIf="x > 7 - seat.Seat">
+                <!-- empty seats -->
+                <div class="empty">
+                  {{ (seat.rowNo - 1) * 7 + x }}
                 </div>
-            </div>
-        </ng-container>
+              </ng-container>
+            </ng-container>
 
-    </div>
+            <ng-container *ngIf="seat.rowNo == 12">
+              <ng-container *ngIf="x <= 3 - seat.Seat && x <= 3">
+                <!-- filled seats -->
+                <div class="filled">
+                  {{ (seat.rowNo - 1) * 7 + x }}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="x > 3 - seat.Seat && x <= 3">
+                <!-- empty seats -->
+                <div class="empty">
+                  {{ (seat.rowNo - 1) * 7 + x }}
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
